@@ -60,6 +60,7 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: catalog-info.yaml
+        branch: main
 
   output:
     links:
