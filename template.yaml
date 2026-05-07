@@ -57,6 +57,8 @@ spec:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
+          repoUrl: ${{ parameters.repoUrl }}
+          repo: ${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}
 
     - id: publish
       name: Publish repository
