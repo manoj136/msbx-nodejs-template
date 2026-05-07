@@ -37,6 +37,17 @@ spec:
             allowedHosts:
               - github.com
   steps:
+    # Debug Parameters
+    - id: debug
+      name: Debug Parameters
+      action: debug:log
+      input:
+        message: |
+          Name: ${{ parameters.name }}
+          Description: ${{ parameters.description }}
+          Owner: ${{ parameters.owner }}
+          Repo URL: ${{ parameters.repoUrl }}
+
     - id: fetch-base
       name: Fetch Template
       action: fetch:template
