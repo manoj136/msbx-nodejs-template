@@ -84,12 +84,19 @@ spec:
           repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
           repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
 
+    - id: parse-repo
+      name: Parse Repo
+      action: debug:log
+      input:
+        message: |
+          owner=${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}
+          repo=${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}
+
     - id: register
       name: Register in Backstage
       action: catalog:register
       input:
-        repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
-        catalogInfoPath: catalog-info.yaml
+        catalogInfoUrl: "https://raw.githubusercontent.com/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/main/catalog-info.yaml"
 
   output:
     links:
