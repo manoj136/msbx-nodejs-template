@@ -59,7 +59,7 @@ spec:
       action: catalog:register
       input:
         repoUrl: ${{ parameters.repoUrl }}
-        catalogInfoPath: catalog-info.yaml.njk
+        catalogInfoPath: catalog-info.yaml
 
   output:
     links:
