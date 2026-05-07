@@ -7,7 +7,7 @@ metadata:
   description: Create a standard Node.js Express microservice
 
 spec:
-  owner: platform-team
+  owner: msbx-team
   type: service
 
   parameters:
