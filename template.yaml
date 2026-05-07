@@ -59,15 +59,6 @@ spec:
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
 
-    - id: debug-publish
-      name: Debug Publish Outputs
-      action: debug:log
-      input:
-        message: |
-          remoteUrl=${{ steps.publish.output.remoteUrl }}
-          repoContentsUrl=${{ steps.publish.output.repoContentsUrl }}
-          commitHash=${{ steps.publish.output.commitHash }}
-
     - id: publish
       name: Publish repository
       action: publish:github
@@ -75,18 +66,31 @@ spec:
         repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
         description: Node.js service ${{ parameters.name }}
 
+    - id: debug-publish
+      name: Debug Publish Outputs
+      action: debug:log
+      input:
+        message: |
+          remoteUrl=${{ steps.publish.output.remoteUrl }}
+          repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
+          repoContentsUrl=${{ steps.publish.output.repoContentsUrl }}
+          commitHash=${{ steps.publish.output.commitHash }}
+
     - id: register
       name: Register in Backstage
       action: catalog:register
       input:
-        repoContentsUrl: "https://api.github.com/repos/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/contents"
-        catalogInfoPath: "/catalog-info.yaml"
+        repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
+        catalogInfoPath: catalog-info.yaml
+
 
     - id: debug-register
       name: Debug Register URL
       action: debug:log
       input:
-        message: "https://api.github.com/repos/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/contents"
+        message: |
+          repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
+          "https://api.github.com/repos/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/contents"
 
   output:
     links:
