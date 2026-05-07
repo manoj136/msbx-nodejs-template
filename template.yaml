@@ -60,3 +60,29 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        icon: github
+        url: ${{ steps.publish.output.remoteUrl }}
+
+      - title: Open in Catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+
+      - title: Repository Contents
+        url: ${{ steps.publish.output.repoContentsUrl }}
+
+    text:
+      - title: Next Steps
+        content: |
+          Your Node.js Express service has been created successfully.
+
+          Recommended next steps:
+          - Clone the repository
+          - Run npm install
+          - Run npm run dev
+          - Configure CI/CD
+          - Deploy to Kubernetes
+          - Add TechDocs
