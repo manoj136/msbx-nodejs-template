@@ -15,16 +15,13 @@ spec:
       required:
         - name
         - owner
-
       properties:
         name:
           title: Service Name
           type: string
-
         description:
           title: Description
           type: string
-
         owner:
           title: Owner
           type: string
@@ -45,7 +42,7 @@ spec:
       action: publish:github
       input:
         repoUrl: ${{ parameters.repoUrl }}
-  		  description: Node.js service ${{ parameters.componentName }}
+        description: Node.js service ${{ parameters.name }}
 
     - id: register
       name: Register in Backstage
