@@ -88,8 +88,8 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:
-        repoContentsUrl: "https://api.github.com/repos/manoj136/bs-nodejs-demo/contents"
-        catalogInfoPath: "/catalog-info.yaml"
+        repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
+        catalogInfoPath: catalog-info.yaml
 
   output:
     links:
