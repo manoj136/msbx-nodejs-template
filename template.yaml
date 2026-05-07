@@ -59,6 +59,15 @@ spec:
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
 
+    - id: debug-publish
+      name: Debug Publish Outputs
+      action: debug:log
+      input:
+        message: |
+          remoteUrl=${{ steps.publish.output.remoteUrl }}
+          repoContentsUrl=${{ steps.publish.output.repoContentsUrl }}
+          commitHash=${{ steps.publish.output.commitHash }}
+
     - id: publish
       name: Publish repository
       action: publish:github
@@ -70,7 +79,7 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:
-        repoContentsUrl: https://api.github.com/repos/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/contents
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: catalog-info.yaml
 
   output:
