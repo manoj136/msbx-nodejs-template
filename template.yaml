@@ -70,7 +70,7 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:
-        catalogInfoUrl: https://raw.githubusercontent.com/manoj136/mk-backstage-template-9/main/catalog-info.yaml
+        catalogInfoUrl: https://raw.githubusercontent.com/msbx-team/mk-backstage-template-10/main/catalog-info.yaml
 
   output:
     links:
