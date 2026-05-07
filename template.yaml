@@ -40,12 +40,12 @@ spec:
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
 
-  	- id: publish
-  	  name: Publish repository
-  	  action: publish:github
-  	  input:
-  		  repoUrl: ${{ parameters.repoUrl }}
-  		  description: Node.js service ${{ parameters.componentName }}
+    - id: publish
+      name: Publish repository
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: Node.js service ${{ parameters.componentNam
 
     - id: register
       name: Register in Backstage
@@ -53,4 +53,3 @@ spec:
       input:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: '/catalog-info.yaml'
-
