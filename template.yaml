@@ -57,21 +57,19 @@ spec:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
-          repoUrl: ${{ parameters.repoUrl }}
-          repo: ${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}
 
     - id: publish
       name: Publish repository
       action: publish:github
       input:
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
         description: Node.js service ${{ parameters.name }}
 
     - id: register
       name: Register in Backstage
       action: catalog:register
       input:
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
         catalogInfoPath: catalog-info.yaml
 
   output:
