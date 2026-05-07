@@ -45,7 +45,7 @@ spec:
       action: publish:github
       input:
         repoUrl: ${{ parameters.repoUrl }}
-        description: Node.js service ${{ parameters.componentNam
+  		  description: Node.js service ${{ parameters.componentName }}
 
     - id: register
       name: Register in Backstage
