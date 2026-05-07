@@ -1,0 +1,41 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+
+metadata:
+  name: nodejs-express-service
+  title: Node.js Express Service
+  description: Create a standard Node.js Express microservice
+
+spec:
+  owner: platform-team
+  type: service
+
+  parameters:
+    - title: Service Information
+      required:
+        - name
+        - owner
+
+      properties:
+        name:
+          title: Service Name
+          type: string
+
+        description:
+          title: Description
+          type: string
+
+        owner:
+          title: Owner
+          type: string
+
+  steps:
+    - id: fetch-base
+      name: Fetch Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
