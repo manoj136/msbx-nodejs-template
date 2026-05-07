@@ -69,8 +69,9 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:
-        repoUrl: ${{ parameters.repoUrl }}
-        catalogInfoPath: catalog-info.yaml
+        location:
+          type: url
+          target: https://github.com/${{ parameters.repoUrl | parseRepoUrl | pick('Owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/blob/main/catalog-info.yaml
 
   output:
     links:
