@@ -90,7 +90,7 @@ spec:
       input:
         message: |
           repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
-          "https://api.github.com/repos/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/contents"
+      
 
   output:
     links:
