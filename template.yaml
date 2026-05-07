@@ -34,7 +34,7 @@ spec:
       name: Fetch Template
       action: fetch:template
       input:
-        url: ./skeleton
+        url: https://github.com/manoj136/msbx-nodejs-template
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
