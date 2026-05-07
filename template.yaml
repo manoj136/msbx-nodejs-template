@@ -71,7 +71,7 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl: https://api.github.com/repos/${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/contents
-        catalogInfoPath: /catalog-info.yaml
+        catalogInfoPath: catalog-info.yaml
 
   output:
     links:
