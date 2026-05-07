@@ -60,7 +60,6 @@ spec:
       input:
         repoUrl: ${{ parameters.repoUrl }}
         catalogInfoPath: catalog-info.yaml
-        branch: main
 
   output:
     links:
