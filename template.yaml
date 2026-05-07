@@ -2,30 +2,40 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 
 metadata:
-  name: nodejs-express-service
-  title: Node.js Express Service
-  description: Create a standard Node.js Express microservice
-
+  name: nodejs-service
+  title: Node.js Microservice
+  description: Create a standard Node.js service with Express
+  tags:
+    - nodejs
+    - express
+    - backend
 spec:
   owner: msbx-team
   type: service
 
   parameters:
-    - title: Service Information
+    - title: Basic Information
       required:
-        - name
-        - owner
+        - componentName
       properties:
-        name:
-          title: Service Name
+        componentName:
+          title: Service name
           type: string
-        description:
-          title: Description
-          type: string
-        owner:
-          title: Owner
-          type: string
+          pattern: '^[a-z0-9-]+$'
+          description: Unique name of the service
 
+    - title: Repository Configuration
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository URL
+          type: string
+          description: Git repository URL
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
   steps:
     - id: fetch-base
       name: Fetch Template
