@@ -76,14 +76,6 @@ spec:
           repoContentsUrl=${{ steps.publish.output.repoContentsUrl }}
           commitHash=${{ steps.publish.output.commitHash }}
 
-    - id: register
-      name: Register in Backstage
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: catalog-info.yaml
-
-
     - id: debug-register
       name: Debug Register URL
       action: debug:log
@@ -91,7 +83,13 @@ spec:
         message: |
           repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
           repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-      
+
+    - id: register
+      name: Register in Backstage
+      action: catalog:register
+      input:
+        repoContentsUrl: "https://api.github.com/repos/manoj136/bs-nodejs-demo/contents"
+        catalogInfoPath: "/catalog-info.yaml"
 
   output:
     links:
