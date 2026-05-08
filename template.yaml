@@ -90,7 +90,7 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:      
-        remoteUrl: ${{ steps.publish.output.remoteUrl }}
+        repoUrl: ${{ steps.publish.output.remoteUrl }}
         catalogInfoPath: catalog-info.yaml
 
   output:
