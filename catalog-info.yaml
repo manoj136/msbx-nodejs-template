@@ -1,11 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
-
 metadata:
-  name: nodejs-service
-  description: nodejs service
-
+  name: my-nodejs-service
+  description: Node.js Express microservice
+  tags:
+    - nodejs
+    - express
+    - backend
 spec:
   type: service
-  lifecycle: production
+  lifecycle: sandbox
   owner: msbx-team
