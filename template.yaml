@@ -75,6 +75,7 @@ spec:
         repoUrl: ${{ parameters.repoUrl }}
         description: Node.js service ${{ parameters.name }}
         defaultBranch: main
+        repoVisibility: public
 
     - id: debug-publish
       name: Debug Publish Outputs
@@ -90,8 +91,7 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:      
-        repoUrl: ${{ steps.publish.output.remoteUrl }}
-        catalogInfoPath: '/catalog-info.yaml'
+        catalogInfoUrl: "https://raw.githubusercontent.com/manoj136/${{ parameters.name }}/main/catalog-info.yaml"
 
   output:
     links:
