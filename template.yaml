@@ -59,7 +59,6 @@ spec:
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
           name: ${{ parameters.componentName }}
-          githubOwner: manoj136
 
     - id: publish
       name: Publish repository
