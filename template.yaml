@@ -9,43 +9,45 @@ metadata:
     - nodejs
     - express
     - backend
+
 spec:
   owner: msbx-team
   type: service
 
   parameters:
     - title: Service Information
-        required:
-          - name
-          - owner
-          - repoUrl
+      required:
+        - name
+        - owner
+        - repoUrl
 
-        properties:
-          name:
-            title: Service Name
-            type: string
-            description: Unique name of the service
+      properties:
+        name:
+          title: Service Name
+          type: string
+          description: Unique name of the service
+          pattern: '^[a-z0-9-]+$'
 
-          description:
-            title: Description
-            type: string
-            description: Service description
+        description:
+          title: Description
+          type: string
+          description: Service description
 
-          owner:
-            title: Owner
-            type: string
-            description: Team or user owning the service
+        owner:
+          title: Owner
+          type: string
+          description: Team or user owning the service
+          default: guests
 
-          repoUrl:
-            title: Repository Location
-            type: string
-            ui:field: RepoUrlPicker
-            ui:options:
-              allowedHosts:
-                - github.com
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
 
   steps:
-    # Debug Parameters
     - id: debug
       name: Debug Parameters
       action: debug:log
@@ -55,24 +57,24 @@ spec:
           Description: ${{ parameters.description }}
           Owner: ${{ parameters.owner }}
           Repo URL: ${{ parameters.repoUrl }}
-          repoContentsUrl = ${{ steps.publish.output.repoContentsUrl }}
 
     - id: fetch-base
       name: Fetch Template
       action: fetch:template
       input:
-        url: https://github.com/manoj136/msbx-nodejs-template
+        url: ./skeleton
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
 
     - id: publish
-      name: Publish repository
+      name: Publish Repository
       action: publish:github
       input:
-        repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
+        repoUrl: ${{ parameters.repoUrl }}
         description: Node.js service ${{ parameters.name }}
+        defaultBranch: main
 
     - id: debug-publish
       name: Debug Publish Outputs
@@ -80,34 +82,15 @@ spec:
       input:
         message: |
           remoteUrl=${{ steps.publish.output.remoteUrl }}
-          repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
           repoContentsUrl=${{ steps.publish.output.repoContentsUrl }}
           commitHash=${{ steps.publish.output.commitHash }}
-
-    - id: debug-register
-      name: Debug Register URL
-      action: debug:log
-      input:
-        message: |
-          repoUrl: ${{ parameters.repoUrl | replace("&amp;", "&") }}
-          repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-
-    - id: parse-repo
-      name: Parse Repo
-      action: debug:log
-      input:
-        message: |
-          owner=${{ parameters.repoUrl | parseRepoUrl | pick('owner') }}
-          repo=${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}
 
     - id: register
       name: Register in Backstage
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: catalog-info.yaml
-      
-      
+        catalogInfoUrl: "https://raw.githubusercontent.com/manoj136/${{ parameters.name }}/main/catalog-info.yaml"
+
   output:
     links:
       - title: Repository
@@ -117,9 +100,6 @@ spec:
       - title: Open in Catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
-
-      - title: Repository Contents
-        url: ${{ steps.publish.output.repoContentsUrl }}
 
     text:
       - title: Next Steps
