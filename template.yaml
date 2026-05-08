@@ -14,28 +14,36 @@ spec:
   type: service
 
   parameters:
-    - title: Basic Information
-      required:
-        - componentName
-      properties:
-        componentName:
-          title: Service name
-          type: string
-          pattern: '^[a-z0-9-]+$'
-          description: Unique name of the service
+    - title: Service Information
+        required:
+          - name
+          - owner
+          - repoUrl
 
-    - title: Repository Configuration
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository URL
-          type: string
-          description: Git repository URL
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
+        properties:
+          name:
+            title: Service Name
+            type: string
+            description: Unique name of the service
+
+          description:
+            title: Description
+            type: string
+            description: Service description
+
+          owner:
+            title: Owner
+            type: string
+            description: Team or user owning the service
+
+          repoUrl:
+            title: Repository Location
+            type: string
+            ui:field: RepoUrlPicker
+            ui:options:
+              allowedHosts:
+                - github.com
+
   steps:
     # Debug Parameters
     - id: debug
