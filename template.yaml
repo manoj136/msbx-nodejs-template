@@ -88,8 +88,8 @@ spec:
     - id: register
       name: Register in Backstage
       action: catalog:register
-      input:
-        catalogInfoUrl: "https://raw.githubusercontent.com/manoj136/${{ parameters.name }}/main/catalog-info.yaml"
+      input:      
+        catalogInfoUrl: "https://github.com/manoj136/${{ parameters.name }}/blob/main/catalog-info.yaml"
 
   output:
     links:
