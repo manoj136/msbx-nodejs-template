@@ -83,14 +83,15 @@ spec:
         message: |
           remoteUrl=${{ steps.publish.output.remoteUrl }}
           repoContentsUrl=${{ steps.publish.output.repoContentsUrl }}
+          repoUrl=${{ parameters.repoUrl }}
           commitHash=${{ steps.publish.output.commitHash }}
 
     - id: register
       name: Register in Backstage
       action: catalog:register
       input:      
-        repoUrl: ${{ parameters.repoUrl }}
-        catalogInfoPath: '/catalog-info.yaml'
+        remoteUrl: ${{ steps.publish.output.remoteUrl }}
+        catalogInfoPath: catalog-info.yaml
 
   output:
     links:
