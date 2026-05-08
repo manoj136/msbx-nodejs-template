@@ -55,10 +55,9 @@ spec:
       input:
         url: https://github.com/manoj136/msbx-nodejs-template
         values:
-          # name: ${{ parameters.name }}
+          name: ${{ parameters.name }}
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
-          name: ${{ parameters.componentName }}
 
     - id: publish
       name: Publish repository
@@ -97,10 +96,8 @@ spec:
       name: Register in Backstage
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: catalog-info.yaml
+        catalogInfoUrl: "https://raw.githubusercontent.com/${{ parameters.repoUrl | parseRepoUrl | pick('Owner') }}/${{ parameters.repoUrl | parseRepoUrl | pick('repo') }}/main/catalog-info.yaml"
 
-        
   output:
     links:
       - title: Repository
