@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ${{ values.name }}
-  description: Node.js Express microservice
+  description: ${{ values.description }}
   tags:
     - nodejs
     - express
@@ -10,4 +10,4 @@ metadata:
 spec:
   type: service
   lifecycle: sandbox
-  owner: msbx-team
+  owner: ${{ values.owner }}
