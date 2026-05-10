@@ -46,6 +46,8 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+            allowedOwners:
+              - manoj136
 
   steps:
     - id: debug
@@ -55,7 +57,6 @@ spec:
         message: |
           Name: ${{ parameters.name }}
           Description: ${{ parameters.description }}
-          Owner: ${{ parameters.owner }}
           Repo URL: ${{ parameters.repoUrl }}
 
     - id: fetch-base
@@ -66,7 +67,6 @@ spec:
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
-          owner: ${{ parameters.owner }}
 
     - id: publish
       name: Publish Repository
