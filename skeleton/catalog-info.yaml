@@ -10,4 +10,4 @@ metadata:
 spec:
   type: service
   lifecycle: sandbox
-  owner: ${{ values.owner }}
+  owner:  ${{ values.owner }}
